@@ -2,14 +2,14 @@ import 'package:flutter/src/foundation/key.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/widgets.dart';
 
-class MyDrawer extends StatefulWidget {
-  const MyDrawer({Key? key}) : super(key: key);
+class MorePage extends StatefulWidget {
+  const MorePage({Key? key}) : super(key: key);
 
   @override
-  State<MyDrawer> createState() => _MyDrawerState();
+  State<MorePage> createState() => _MorePageState();
 }
 
-class _MyDrawerState extends State<MyDrawer> {
+class _MorePageState extends State<MorePage> {
   @override
   Widget build(BuildContext context) {
     return Container();

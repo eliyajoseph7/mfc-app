@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:mfcapp/screens/home.dart';
+import 'package:mfcapp/screens/index.dart';
 
 void main() {
   runApp(const MyApp());
@@ -26,7 +26,7 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.grey,
         fontFamily: 'OpenSans'
       ),
-      home: const HomePage(),
+      home: const IndexPage(),
       debugShowCheckedModeBanner: false,
     );
   }

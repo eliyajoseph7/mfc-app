@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:mfcapp/screens/drawer.dart';
+import 'package:flutter/src/foundation/key.dart';
+import 'package:flutter/src/widgets/framework.dart';
+import 'package:flutter/widgets.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -12,7 +14,9 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     var topContainerHeight = MediaQuery.of(context).size.height * 0.25;
-    var listHeight = MediaQuery.of(context).size.height - (topContainerHeight + 28);
+    var bottomBarHeight = MediaQuery.of(context).size.height * 0.08;
+    var listHeight = MediaQuery.of(context).size.height -
+        (topContainerHeight + 28 + bottomBarHeight);
     return Scaffold(
       body: Column(
         children: [
@@ -22,10 +26,21 @@ class _HomePageState extends State<HomePage> {
               children: [
                 Container(
                   height: topContainerHeight,
-                  decoration: BoxDecoration(color: Colors.grey[100]),
+                  decoration: BoxDecoration(
+                    color: Colors.grey[100],
+                    borderRadius: const BorderRadius.only(
+                      bottomLeft: Radius.circular(25),
+                      bottomRight: Radius.circular(25),
+                    ),
+                  ),
                   child: Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: Card(
+                      shape: const RoundedRectangleBorder(
+                        borderRadius: BorderRadius.all(
+                          Radius.circular(25),
+                        ),
+                      ),
                       child: Row(
                         crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
@@ -36,23 +51,31 @@ class _HomePageState extends State<HomePage> {
                               children: const [
                                 FittedBox(
                                   fit: BoxFit.fitHeight,
-                                  child: Text(
-                                    'Sample',
-                                    style: TextStyle(
-                                      fontSize: 50,
-                                      fontWeight: FontWeight.bold,
-                                      // fontFamily: 'OpenSans'
+                                  child: Padding(
+                                    padding:
+                                        EdgeInsets.symmetric(horizontal: 3.0),
+                                    child: Text(
+                                      'Sample',
+                                      style: TextStyle(
+                                        fontSize: 50,
+                                        fontWeight: FontWeight.bold,
+                                        // fontFamily: 'OpenSans'
+                                      ),
                                     ),
                                   ),
                                 ),
                                 FittedBox(
                                   fit: BoxFit.fitHeight,
-                                  child: Text(
-                                    'Sample Text',
-                                    style: TextStyle(
-                                      fontSize: 50,
-                                      fontWeight: FontWeight.bold,
-                                      // fontFamily: 'OpenSans'
+                                  child: Padding(
+                                    padding:
+                                        EdgeInsets.symmetric(horizontal: 3.0),
+                                    child: Text(
+                                      'Sample Text',
+                                      style: TextStyle(
+                                        fontSize: 50,
+                                        fontWeight: FontWeight.bold,
+                                        // fontFamily: 'OpenSans'
+                                      ),
                                     ),
                                   ),
                                 ),
@@ -64,7 +87,8 @@ class _HomePageState extends State<HomePage> {
                             width: MediaQuery.of(context).size.width * 0.35,
                             decoration: const BoxDecoration(
                               image: DecorationImage(
-                                image: ExactAssetImage('assets/images/dove.png'),
+                                image:
+                                    ExactAssetImage('assets/images/dove.png'),
                               ),
                             ),
                             // child: Image(
@@ -81,7 +105,11 @@ class _HomePageState extends State<HomePage> {
                   top: 2,
                   right: 8,
                   child: CircleAvatar(
-                    child: Icon(Icons.person_rounded),
+                    backgroundColor: Colors.white70,
+                    child: Icon(
+                      Icons.menu_book_rounded,
+                      color: Colors.amber,
+                    ),
                   ),
                 ),
               ],
@@ -93,7 +121,6 @@ class _HomePageState extends State<HomePage> {
           )
         ],
       ),
-      drawer: const MyDrawer(),
     );
   }
 }
