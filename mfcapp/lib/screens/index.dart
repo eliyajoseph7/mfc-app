@@ -10,12 +10,10 @@ class IndexPage extends StatefulWidget {
 }
 
 class _IndexPageState extends State<IndexPage> {
-  final ScrollController __homeController = ScrollController();
+  // final ScrollController __homeController = ScrollController();
   var selectedIndex = 0;
 
-  List<Widget> _widgetOptions = <Widget> [
-    HomePage(), MorePage()
-  ];
+  final List<Widget> _widgetOptions = <Widget>[HomePage(), MorePage()];
   @override
   Widget build(BuildContext context) {
     var bottomBarHeight = MediaQuery.of(context).size.height * 0.08;
@@ -25,14 +23,14 @@ class _IndexPageState extends State<IndexPage> {
         height: bottomBarHeight,
         decoration: BoxDecoration(
             borderRadius: const BorderRadius.only(
-              topLeft: Radius.circular(50),
-              topRight: Radius.circular(50),
+              topLeft: Radius.circular(25),
+              topRight: Radius.circular(25),
             ),
             boxShadow: [
               BoxShadow(
-                  color: Colors.grey.shade300, spreadRadius: 20, blurRadius: 1)
+                  color: Colors.grey.shade300, spreadRadius: 10, blurRadius: 1)
             ],
-            color: Colors.red),
+            color: Colors.amber),
         child: BottomNavigationBar(
           items: const [
             BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Home'),
@@ -40,7 +38,8 @@ class _IndexPageState extends State<IndexPage> {
                 icon: Icon(Icons.menu_rounded), label: 'More'),
           ],
           currentIndex: selectedIndex,
-          selectedItemColor: Colors.red,
+          selectedItemColor: Colors.amber[700],
+          selectedLabelStyle: const TextStyle(fontWeight: FontWeight.bold),
           onTap: (int value) {
             setState(() {
               selectedIndex = value;
