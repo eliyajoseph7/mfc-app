@@ -1,3 +1,4 @@
+import 'package:badges/badges.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/foundation/key.dart';
 import 'package:flutter/src/widgets/framework.dart';
@@ -202,7 +203,7 @@ class _HomePageState extends State<HomePage> {
                                                       padding:
                                                           EdgeInsets.symmetric(
                                                               horizontal: 8.0),
-                                                      child: Text('Read More'),
+                                                      child: Text('..Read More', style: TextStyle(fontStyle: FontStyle.italic),),
                                                     ),
                                                   ],
                                                 )
@@ -240,7 +241,27 @@ class _HomePageState extends State<HomePage> {
                                       ],
                                       borderRadius: BorderRadius.circular(20),
                                       color: Colors.white),
-                                  child: const Center(child: Text('JESUS')),
+                                  child: Stack(
+                                    children: const [
+                                      Center(
+                                        child: Text('JESUS'),
+                                      ),
+                                      Positioned(
+                                        top: 7,
+                                        right: 7,
+                                        child: Padding(
+                                          padding: EdgeInsets.symmetric(horizontal: 8.0, vertical: 4),
+                                          child: Badge(
+                                            badgeContent: Text('3', style: TextStyle(color: Colors.white),),
+                                            child: Icon(
+                                              Icons.notification_add_rounded,
+                                              color: Colors.red,
+                                            ),
+                                          ),
+                                        ),
+                                      ),
+                                    ],
+                                  ),
                                 ),
                               ),
                               Padding(
