@@ -36,6 +36,7 @@ dependencies:
   cupertino_icons: ^1.0.2
   modal_bottom_sheet: ^2.1.2
   badges: ^3.0.2
+  carousel_slider: ^4.2.1
 
 dev_dependencies:
   flutter_test:
@@ -88,6 +89,20 @@ flutter:
         - asset: assets/fonts/OpenSans/OpenSans-MediumItalic.ttf
         - asset: assets/fonts/OpenSans/OpenSans-SemiBold.ttf
         - asset: assets/fonts/OpenSans/OpenSans-SemiBoldItalic.ttf
+
+    - family: DancingScript
+      fonts:
+        - asset: assets/fonts/DancingScript/DancingScript-Regular.ttf
+        - asset: assets/fonts/DancingScript/DancingScript-Bold.ttf
+        - asset: assets/fonts/DancingScript/DancingScript-Medium.ttf
+        - asset: assets/fonts/DancingScript/DancingScript-SemiBold.ttf
+
+    - family: LobsterTwo
+      fonts:
+        - asset: assets/fonts/LobsterTwo/LobsterTwo-Regular.ttf
+        - asset: assets/fonts/LobsterTwo/LobsterTwo-Bold.ttf
+        - asset: assets/fonts/LobsterTwo/LobsterTwo-BoldItalic.ttf
+        - asset: assets/fonts/LobsterTwo/LobsterTwo-Italic.ttf
   #   - family: Trajan Pro
   #     fonts:
   #       - asset: fonts/TrajanPro.ttf

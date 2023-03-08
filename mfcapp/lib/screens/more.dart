@@ -60,6 +60,9 @@ class _MorePageState extends State<MorePage> {
                       children: const [
                         Icon(Icons.notifications_outlined),
                         Badge(
+                          badgeAnimation: BadgeAnimation.rotation(
+                              toAnimate: true,
+                              animationDuration: Duration(seconds: 3)),
                           badgeContent: Text(
                             '3',
                             style: TextStyle(color: Colors.white),
