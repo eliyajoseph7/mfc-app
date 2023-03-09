@@ -3,10 +3,12 @@
 import 'package:badges/badges.dart';
 import 'package:carousel_slider/carousel_options.dart';
 import 'package:carousel_slider/carousel_slider.dart';
-import 'package:flutter/material.dart';
+import 'package:flutter/material.dart' hide Badge, ModalBottomSheetRoute;
 import 'package:flutter/src/foundation/key.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/widgets.dart';
+import 'package:mfcapp/screens/notes/notes_list.dart';
+import 'package:mfcapp/screens/teachings/teach_list.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 
 class HomePage extends StatefulWidget {
@@ -76,7 +78,7 @@ class _HomePageState extends State<HomePage> {
                                       style: TextStyle(
                                         fontSize: 50,
                                         fontWeight: FontWeight.bold,
-                                        // fontFamily: 'OpenSans'
+                                        fontFamily: 'LobsterTwo'
                                       ),
                                     ),
                                   ),
@@ -132,107 +134,114 @@ class _HomePageState extends State<HomePage> {
                             children: [
                               Padding(
                                 padding: const EdgeInsets.all(8.0),
-                                child: Container(
-                                  height: 50,
-                                  width: 200,
-                                  decoration: BoxDecoration(
-                                    boxShadow: [
-                                      BoxShadow(
-                                          color: Colors.grey.shade300,
-                                          spreadRadius: 1,
-                                          blurRadius: 10)
-                                    ],
-                                    borderRadius: BorderRadius.circular(20),
-                                    // gradient:  LinearGradient(
-                                    //   colors: [Colors.amber.shade50, Colors.white],
-                                    //   begin: Alignment.topLeft,
-                                    //   end: Alignment.bottomRight,
-                                    //   tileMode: TileMode.clamp,
-                                    // ),
-                                    color: Colors.white,
-                                  ),
-                                  child: Stack(
-                                    children: [
-                                      Center(
-                                        child: Column(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.center,
-                                          children: [
-                                            Icon(
-                                              Icons.menu_book_rounded,
-                                              size: 50,
-                                              color: Colors.amber,
-                                            ),
-                                            Text(
-                                              'Somo Jipya'.toUpperCase(),
-                                              style: TextStyle(),
-                                            ),
-                                          ],
-                                        ),
-                                      ),
-                                      Positioned(
-                                        top: 7,
-                                        right: 7,
-                                        child: Padding(
-                                          padding: EdgeInsets.symmetric(
-                                              horizontal: 8.0, vertical: 4),
-                                          child: Badge(
-                                            badgeAnimation:
-                                                BadgeAnimation.rotation(
-                                              toAnimate: true,
-                                              animationDuration:
-                                                  Duration(seconds: 3),
-                                            ),
-                                            badgeContent: Text(
-                                              '3',
-                                              style: TextStyle(
-                                                  color: Colors.white),
-                                            ),
-                                            child: Icon(
-                                              Icons.notification_add_rounded,
-                                              color: Colors.red,
-                                            ),
-                                          ),
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                              ),
-                              Padding(
-                                padding: const EdgeInsets.all(8.0),
-                                child: Container(
-                                  height: 50,
-                                  width: 200,
-                                  decoration: BoxDecoration(
+                                child: GestureDetector(
+                                  onTap: () => Navigator.of(context).push(MaterialPageRoute(builder: (BuildContext context) => TeachListPage())),
+                                  child: Container(
+                                    height: 50,
+                                    width: 200,
+                                    decoration: BoxDecoration(
                                       boxShadow: [
                                         BoxShadow(
                                             color: Colors.grey.shade300,
                                             spreadRadius: 1,
                                             blurRadius: 10)
                                       ],
-                                      gradient: LinearGradient(
+                                      borderRadius: BorderRadius.circular(20),
+                                      // gradient:  LinearGradient(
+                                      //   colors: [Colors.amber.shade50, Colors.white],
+                                      //   begin: Alignment.topLeft,
+                                      //   end: Alignment.bottomRight,
+                                      //   tileMode: TileMode.clamp,
+                                      // ),
+                                      color: Colors.white,
+                                    ),
+                                    child: Stack(
+                                      children: [
+                                        Center(
+                                          child: Column(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.center,
+                                            children: [
+                                              Icon(
+                                                Icons.menu_book_rounded,
+                                                size: 50,
+                                                color: Colors.amber,
+                                              ),
+                                              Text(
+                                                'Somo Jipya'.toUpperCase(),
+                                                style: TextStyle(),
+                                              ),
+                                            ],
+                                          ),
+                                        ),
+                                        Positioned(
+                                          top: 7,
+                                          right: 7,
+                                          child: Padding(
+                                            padding: EdgeInsets.symmetric(
+                                                horizontal: 8.0, vertical: 4),
+                                            child: Badge(
+                                              badgeAnimation:
+                                                  BadgeAnimation.rotation(
+                                                toAnimate: true,
+                                                animationDuration:
+                                                    Duration(seconds: 3),
+                                              ),
+                                              badgeContent: Text(
+                                                '3',
+                                                style: TextStyle(
+                                                    color: Colors.white),
+                                              ),
+                                              child: Icon(
+                                                Icons.notification_add_rounded,
+                                                color: Colors.red,
+                                              ),
+                                            ),
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                ),
+                              ),
+                              Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: GestureDetector(
+                                  onTap: () => Navigator.of(context).push(MaterialPageRoute(builder: (BuildContext context) => MyNotes())),
+                                  child: Container(
+                                    height: 50,
+                                    width: 200,
+                                    decoration: BoxDecoration(
+                                        boxShadow: [
+                                          BoxShadow(
+                                              color: Colors.grey.shade300,
+                                              spreadRadius: 1,
+                                              blurRadius: 10)
+                                        ],
+                                        gradient: LinearGradient(
                                           colors: [
                                             Colors.white,
                                             Colors.amber.shade100
                                           ],
                                           begin: Alignment.topCenter,
                                           end: Alignment.bottomRight,
-                                          tileMode: TileMode.clamp),
-                                      borderRadius: BorderRadius.circular(20),
-                                      color: Colors.white),
-                                  child: Center(
-                                    child: Column(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.center,
-                                      children: [
-                                        Icon(
-                                          Icons.speaker_notes_rounded,
-                                          color: Colors.amber,
-                                          size: 50,
+                                          tileMode: TileMode.clamp,
                                         ),
-                                        Text('Notes'.toUpperCase()),
-                                      ],
+                                        borderRadius: BorderRadius.circular(20),
+                                        color: Colors.white),
+                                    child: Center(
+                                      child: Column(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.center,
+                                        children: [
+                                          Icon(
+                                            Icons.speaker_notes_rounded,
+                                            color: Colors.amber,
+                                            size: 50,
+                                          ),
+                                          Text('Notes'.toUpperCase()),
+                                        ],
+                                      ),
                                     ),
                                   ),
                                 ),
@@ -406,7 +415,7 @@ class _HomePageState extends State<HomePage> {
                                               fontSize: 20,
                                               fontWeight: FontWeight.bold,
                                               // fontStyle: FontStyle.italic,
-                                              fontFamily: 'DancingScript',
+                                              fontFamily: 'LobsterTwo',
                                               color: Colors.grey[500]),
                                         ),
                                       ),

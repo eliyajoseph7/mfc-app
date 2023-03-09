@@ -1,4 +1,6 @@
-import 'package:flutter/material.dart';
+import 'package:badges/badges.dart';
+import 'package:flutter/material.dart' hide Badge;
+import 'package:mfcapp/screens/chart.dart';
 import 'package:mfcapp/screens/more.dart';
 import 'package:mfcapp/screens/home.dart';
 
@@ -13,7 +15,10 @@ class _IndexPageState extends State<IndexPage> {
   // final ScrollController __homeController = ScrollController();
   var selectedIndex = 0;
 
-  final List<Widget> _widgetOptions = <Widget>[HomePage(), MorePage()];
+  final List<Widget> _widgetOptions = <Widget>[
+    const HomePage(),
+    const MorePage()
+  ];
   @override
   Widget build(BuildContext context) {
     var bottomBarHeight = MediaQuery.of(context).size.height * 0.08;
@@ -57,6 +62,25 @@ class _IndexPageState extends State<IndexPage> {
               // break;
             }
           },
+        ),
+      ),
+      floatingActionButton: FloatingActionButton(
+        backgroundColor: Colors.white,
+        onPressed: () => Navigator.of(context).push(MaterialPageRoute(
+            builder: (BuildContext context) => const ChatPage())),
+        child: const Badge(
+          badgeAnimation: BadgeAnimation.rotation(
+            toAnimate: true,
+            animationDuration: Duration(seconds: 3),
+          ),
+          badgeContent: Text(
+            '3',
+            style: TextStyle(color: Colors.white),
+          ),
+          child: Icon(
+            Icons.message_rounded,
+            color: Colors.amber,
+          ),
         ),
       ),
     );
