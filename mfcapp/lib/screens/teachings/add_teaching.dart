@@ -1,7 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/src/foundation/key.dart';
-import 'package:flutter/src/widgets/framework.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_quill/flutter_quill.dart' hide Text;
 // import 'package:flutter_quill/flutter_quill.dart' as quill;
 import 'package:intl/intl.dart';
@@ -14,8 +11,8 @@ class PrepareTeachingPage extends StatefulWidget {
 }
 
 class _PrepareTeachingPageState extends State<PrepareTeachingPage> {
-  bool _showSave = false;
-  QuillController _controller = QuillController.basic();
+  final bool _showSave = false;
+  final QuillController _controller = QuillController.basic();
 
   @override
   Widget build(BuildContext context) {
@@ -77,11 +74,9 @@ class _PrepareTeachingPageState extends State<PrepareTeachingPage> {
                           controller: _controller,
                         ),
                         Expanded(
-                          child: Container(
-                            child: QuillEditor.basic(
-                              controller: _controller,
-                              readOnly: false,
-                            ),
+                          child: QuillEditor.basic(
+                            controller: _controller,
+                            readOnly: false,
                           ),
                         ),
                         // TextFormField(

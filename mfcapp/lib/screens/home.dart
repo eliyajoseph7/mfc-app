@@ -1,12 +1,8 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
 
 import 'package:badges/badges.dart';
-import 'package:carousel_slider/carousel_options.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart' hide Badge, ModalBottomSheetRoute;
-import 'package:flutter/src/foundation/key.dart';
-import 'package:flutter/src/widgets/framework.dart';
-import 'package:flutter/widgets.dart';
 import 'package:mfcapp/screens/notes/notes_list.dart';
 import 'package:mfcapp/screens/teachings/teach_list.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
@@ -526,7 +522,7 @@ class _HomePageState extends State<HomePage> {
         builder: (BuildContext context) {
           return SingleChildScrollView(
             controller: ModalScrollController.of(context),
-            child: Container(
+            child: SizedBox(
               height: MediaQuery.of(context).size.height - topHeight,
               child: ListView(
                 padding: EdgeInsets.zero,

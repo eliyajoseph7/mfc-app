@@ -1,8 +1,5 @@
 import 'package:badges/badges.dart';
 import 'package:flutter/material.dart' hide Badge;
-import 'package:flutter/src/foundation/key.dart';
-import 'package:flutter/src/widgets/framework.dart';
-import 'package:flutter/widgets.dart';
 
 class MorePage extends StatefulWidget {
   const MorePage({Key? key}) : super(key: key);
@@ -137,6 +134,23 @@ class _MorePageState extends State<MorePage> {
                           padding: EdgeInsets.symmetric(horizontal: 16.0),
                           child: Text(
                             'Settings',
+                            style: TextStyle(fontSize: 18),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                  const Divider(height: 25),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(
+                        horizontal: 18.0, vertical: 12),
+                    child: Row(
+                      children: const [
+                        Icon(Icons.login_rounded),
+                        Padding(
+                          padding: EdgeInsets.symmetric(horizontal: 16.0),
+                          child: Text(
+                            'Login',
                             style: TextStyle(fontSize: 18),
                           ),
                         ),
