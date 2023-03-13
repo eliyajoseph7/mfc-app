@@ -19,7 +19,7 @@ class _PrepareTeachingPageState extends State<PrepareTeachingPage> {
     return Scaffold(
       appBar: AppBar(
         elevation: 0,
-        title: const Text('Notes'),
+        title: const Text('Somo'),
         backgroundColor: Colors.white,
         actions: [
           _showSave
@@ -47,59 +47,62 @@ class _PrepareTeachingPageState extends State<PrepareTeachingPage> {
           ),
           Padding(
             padding: const EdgeInsets.all(8.0),
-            child: Form(
-              child: Column(
-                children: [
-                  TextFormField(
-                    keyboardType: TextInputType.multiline,
-                    maxLines: null,
-                    style: const TextStyle(
-                        fontSize: 28, fontWeight: FontWeight.w600),
-                    decoration: const InputDecoration(
-                      hintText: 'Title',
-                      border: InputBorder.none,
-                      focusedBorder: InputBorder.none,
-                      enabledBorder: InputBorder.none,
-                      errorBorder: InputBorder.none,
-                      disabledBorder: InputBorder.none,
-                      contentPadding:
-                          EdgeInsets.only(bottom: 11, top: 11, right: 15),
+            child: Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Form(
+                child: Column(
+                  children: [
+                    TextFormField(
+                      keyboardType: TextInputType.multiline,
+                      maxLines: null,
+                      style: const TextStyle(
+                          fontSize: 28, fontWeight: FontWeight.w600),
+                      decoration: const InputDecoration(
+                        hintText: 'Title',
+                        border: InputBorder.none,
+                        focusedBorder: InputBorder.none,
+                        enabledBorder: InputBorder.none,
+                        errorBorder: InputBorder.none,
+                        disabledBorder: InputBorder.none,
+                        contentPadding:
+                            EdgeInsets.only(bottom: 11, top: 11, right: 15),
+                      ),
                     ),
-                  ),
-                  SizedBox(
-                    height: MediaQuery.of(context).size.height,
-                    child: Column(
-                      children: [
-                        QuillToolbar.basic(
-                          controller: _controller,
-                        ),
-                        Expanded(
-                          child: QuillEditor.basic(
+                    SizedBox(
+                      height: MediaQuery.of(context).size.height,
+                      child: Column(
+                        children: [
+                          QuillToolbar.basic(
                             controller: _controller,
-                            readOnly: false,
                           ),
-                        ),
-                        // TextFormField(
-                        //   maxLines: null,
-                        //   minLines: 20,
-                        //   keyboardType: TextInputType.multiline,
-                        //   decoration: const InputDecoration.collapsed(
-                        //     hintText: 'Note something',
-                        //   ),
-                        //   onChanged: (value) {
-                        //     setState(() {
-                        //       if(value.isNotEmpty) {
-                        //        _showSave = true;
-                        //       } else {
-                        //       _showSave = false;
-                        //       }
-                        //     });
-                        //   },
-                        // ),
-                      ],
+                          Expanded(
+                            child: QuillEditor.basic(
+                              controller: _controller,
+                              readOnly: false,
+                            ),
+                          ),
+                          // TextFormField(
+                          //   maxLines: null,
+                          //   minLines: 20,
+                          //   keyboardType: TextInputType.multiline,
+                          //   decoration: const InputDecoration.collapsed(
+                          //     hintText: 'Note something',
+                          //   ),
+                          //   onChanged: (value) {
+                          //     setState(() {
+                          //       if(value.isNotEmpty) {
+                          //        _showSave = true;
+                          //       } else {
+                          //       _showSave = false;
+                          //       }
+                          //     });
+                          //   },
+                          // ),
+                        ],
+                      ),
                     ),
-                  ),
-                ],
+                  ],
+                ),
               ),
             ),
           ),

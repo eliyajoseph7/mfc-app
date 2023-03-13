@@ -1,8 +1,11 @@
 import 'package:badges/badges.dart';
 import 'package:flutter/material.dart' hide Badge;
+import 'package:mfcapp/providers/auth.dart';
+import 'package:mfcapp/screens/auth/login.dart';
 import 'package:mfcapp/screens/chart.dart';
 import 'package:mfcapp/screens/more.dart';
 import 'package:mfcapp/screens/home.dart';
+import 'package:provider/provider.dart';
 
 class IndexPage extends StatefulWidget {
   const IndexPage({Key? key}) : super(key: key);
@@ -14,11 +17,21 @@ class IndexPage extends StatefulWidget {
 class _IndexPageState extends State<IndexPage> {
   // final ScrollController __homeController = ScrollController();
   var selectedIndex = 0;
+  var userId;
 
   final List<Widget> _widgetOptions = <Widget>[
     const HomePage(),
     const MorePage()
   ];
+  @override
+   void initState() {
+    super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
+      var auth = Provider.of<AuthProvider>(context, listen: false);
+      userId = auth.userId;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     var bottomBarHeight = MediaQuery.of(context).size.height * 0.08;
@@ -66,8 +79,13 @@ class _IndexPageState extends State<IndexPage> {
       ),
       floatingActionButton: FloatingActionButton(
         backgroundColor: Colors.white,
-        onPressed: () => Navigator.of(context).push(MaterialPageRoute(
-            builder: (BuildContext context) => const ChatPage())),
+        onPressed: () {
+          Navigator.of(context).push(
+          MaterialPageRoute(
+            builder: (BuildContext context) =>  userId != '' ? const ChatPage() : const LoginPage(),
+          ),
+        );
+        },
         child: const Badge(
           badgeAnimation: BadgeAnimation.rotation(
             toAnimate: true,
