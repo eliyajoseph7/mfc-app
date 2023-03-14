@@ -6,6 +6,7 @@ import 'package:flutter/material.dart' hide Badge, ModalBottomSheetRoute;
 import 'package:mfcapp/screens/notes/notes_list.dart';
 import 'package:mfcapp/screens/teachings/teach_list.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
+import 'package:proste_bezier_curve/proste_bezier_curve.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -25,6 +26,7 @@ class _HomePageState extends State<HomePage> {
       '''1 Hapo mwanzo Mungu aliziumba mbingu na nchi. 2Nayo nchi ilikuwa ukiwa, tena utupu, na giza lilikuwa juu ya uso wa vilindi vya maji; Roho ya Mungu ikatulia juu ya uso wa maji. 3Mungu akasema, Iwe nuru; ikawa nuru. 4Mungu akaiona nuru, ya kuwa ni njema; Mungu akatenga nuru na giza. 5Mungu akaiita nuru Mchana, na giza akaliita Usiku. Ikawa jioni ikawa asubuhi, siku moja.''';
   @override
   Widget build(BuildContext context) {
+    var screenWidth = MediaQuery.of(context).size.width;
     var topContainerHeight = MediaQuery.of(context).size.height * 0.25;
     var bottomBarHeight = MediaQuery.of(context).size.height * 0.08;
     var listHeight = MediaQuery.of(context).size.height -
@@ -39,7 +41,7 @@ class _HomePageState extends State<HomePage> {
                 Container(
                   height: topContainerHeight,
                   decoration: BoxDecoration(
-                    color: Colors.grey[100],
+                    color: Colors.grey.shade100,
                     borderRadius: const BorderRadius.only(
                       bottomLeft: Radius.circular(25),
                       bottomRight: Radius.circular(25),
@@ -47,63 +49,74 @@ class _HomePageState extends State<HomePage> {
                   ),
                   child: Padding(
                     padding: const EdgeInsets.all(8.0),
-                    child: Card(
-                      shape: const RoundedRectangleBorder(
-                        borderRadius: BorderRadius.all(
-                          Radius.circular(25),
-                        ),
+                    child: ClipPath(
+                      clipper: ProsteThirdOrderBezierCurve(
+                        position: ClipPosition.bottom,
+                        list: [
+                          ThirdOrderBezierCurveSection(
+                              p1: Offset(0, 200),
+                              p2: Offset(0, 140),
+                              p3: Offset(screenWidth , 200),
+                              p4: Offset(screenWidth, 140),),
+                        ],
                       ),
-                      child: Row(
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: [
-                          Expanded(
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: const [
-                                FittedBox(
-                                  fit: BoxFit.fitHeight,
-                                  child: Padding(
-                                    padding:
-                                        EdgeInsets.symmetric(horizontal: 3.0),
-                                    child: Text(
-                                      'Holy Spirit',
-                                      style: TextStyle(
-                                        fontSize: 50,
-                                        fontWeight: FontWeight.bold,
-                                        fontFamily: 'LobsterTwo'
+                      child: Container(
+                        decoration: const BoxDecoration(
+                            borderRadius: BorderRadius.only(
+                              topLeft: Radius.circular(50),
+                            ),
+                            color: Colors.white),
+                        child: Row(
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            Expanded(
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: const [
+                                  FittedBox(
+                                    fit: BoxFit.fitHeight,
+                                    child: Padding(
+                                      padding:
+                                          EdgeInsets.symmetric(horizontal: 3.0),
+                                      child: Text(
+                                        'Holy Spirit',
+                                        style: TextStyle(
+                                            fontSize: 50,
+                                            fontWeight: FontWeight.bold,
+                                            fontFamily: 'LobsterTwo'),
                                       ),
                                     ),
                                   ),
-                                ),
-                                FittedBox(
-                                  fit: BoxFit.fitHeight,
-                                  child: Padding(
-                                    padding:
-                                        EdgeInsets.symmetric(horizontal: 3.0),
-                                    child: Text(
-                                      'Breath in Me',
-                                      style: TextStyle(
-                                          fontSize: 50,
-                                          fontWeight: FontWeight.bold,
-                                          fontFamily: 'DancingScript'),
+                                  FittedBox(
+                                    fit: BoxFit.fitHeight,
+                                    child: Padding(
+                                      padding:
+                                          EdgeInsets.symmetric(horizontal: 3.0),
+                                      child: Text(
+                                        'Breath in Me',
+                                        style: TextStyle(
+                                            fontSize: 50,
+                                            fontWeight: FontWeight.bold,
+                                            fontFamily: 'DancingScript'),
+                                      ),
                                     ),
                                   ),
-                                ),
-                              ],
-                            ),
-                          ),
-                          Container(
-                            height: MediaQuery.of(context).size.height,
-                            width: MediaQuery.of(context).size.width * 0.35,
-                            decoration: const BoxDecoration(
-                              image: DecorationImage(
-                                image:
-                                    ExactAssetImage('assets/images/dove.png'),
+                                ],
                               ),
                             ),
-                          ),
-                        ],
+                            Container(
+                              height: MediaQuery.of(context).size.height,
+                              width: MediaQuery.of(context).size.width * 0.35,
+                              decoration: const BoxDecoration(
+                                image: DecorationImage(
+                                  image:
+                                      ExactAssetImage('assets/images/dove.png'),
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
                       ),
                     ),
                   ),
@@ -128,7 +141,10 @@ class _HomePageState extends State<HomePage> {
                               Padding(
                                 padding: const EdgeInsets.all(8.0),
                                 child: GestureDetector(
-                                  onTap: () => Navigator.of(context).push(MaterialPageRoute(builder: (BuildContext context) => TeachListPage())),
+                                  onTap: () => Navigator.of(context).push(
+                                      MaterialPageRoute(
+                                          builder: (BuildContext context) =>
+                                              TeachListPage())),
                                   child: Container(
                                     height: 50,
                                     width: 200,
@@ -200,7 +216,10 @@ class _HomePageState extends State<HomePage> {
                               Padding(
                                 padding: const EdgeInsets.all(8.0),
                                 child: GestureDetector(
-                                  onTap: () => Navigator.of(context).push(MaterialPageRoute(builder: (BuildContext context) => MyNotes())),
+                                  onTap: () => Navigator.of(context).push(
+                                      MaterialPageRoute(
+                                          builder: (BuildContext context) =>
+                                              MyNotes())),
                                   child: Container(
                                     height: 50,
                                     width: 200,
@@ -326,8 +345,8 @@ class _HomePageState extends State<HomePage> {
                                           decoration: BoxDecoration(
                                               color: Colors.white,
                                               image: DecorationImage(
-                                                image: AssetImage(
-                                                    imgList[index]),
+                                                image:
+                                                    AssetImage(imgList[index]),
                                                 fit: BoxFit.cover,
                                               ),
                                               borderRadius:
