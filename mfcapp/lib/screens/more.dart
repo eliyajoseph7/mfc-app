@@ -1,5 +1,8 @@
 import 'package:badges/badges.dart';
 import 'package:flutter/material.dart' hide Badge;
+import 'package:mfcapp/providers/auth.dart';
+import 'package:mfcapp/screens/auth/login.dart';
+import 'package:provider/provider.dart';
 
 class MorePage extends StatefulWidget {
   const MorePage({Key? key}) : super(key: key);
@@ -11,6 +14,8 @@ class MorePage extends StatefulWidget {
 class _MorePageState extends State<MorePage> {
   @override
   Widget build(BuildContext context) {
+    var auth = Provider.of<AuthProvider>(context);
+    auth.isUserLogedin();
     return Scaffold(
       body: Stack(
         children: [
@@ -144,17 +149,27 @@ class _MorePageState extends State<MorePage> {
                   Padding(
                     padding: const EdgeInsets.symmetric(
                         horizontal: 18.0, vertical: 12),
-                    child: Row(
-                      children: const [
-                        Icon(Icons.login_rounded),
-                        Padding(
-                          padding: EdgeInsets.symmetric(horizontal: 16.0),
-                          child: Text(
-                            'Login',
-                            style: TextStyle(fontSize: 18),
+                    child: TextButton(
+                      onPressed: () => auth.isLogedin
+                          ? auth.logout(context)
+                          : Navigator.of(context).push(
+                              MaterialPageRoute(
+                                builder: (BuildContext context) =>
+                                    const LoginPage(),
+                              ),
+                            ),
+                      child: Row(
+                        children: [
+                          Icon(Icons.login_rounded),
+                          Padding(
+                            padding: EdgeInsets.symmetric(horizontal: 16.0),
+                            child: Text(
+                              auth.isLogedin ? 'Logout' : 'Login',
+                              style: TextStyle(fontSize: 18),
+                            ),
                           ),
-                        ),
-                      ],
+                        ],
+                      ),
                     ),
                   ),
                   const SizedBox(

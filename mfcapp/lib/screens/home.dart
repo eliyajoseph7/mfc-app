@@ -16,9 +16,11 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+
   final List<String> imgList = [
-    'assets/images/schedule/sunday.jpg',
-    'assets/images/schedule/monday.jpg',
+    'assets/images/schedule/ratiba.png',
+    'assets/images/schedule/sunday.png',
+    'assets/images/schedule/monday.png',
     'assets/images/schedule/wednesday.png',
   ];
 
@@ -306,16 +308,15 @@ class _HomePageState extends State<HomePage> {
                               horizontal: 8.0, vertical: 8),
                           child: SizedBox(
                             width: MediaQuery.of(context).size.width,
-                            height: 150,
+                            height: 200,
                             child: Container(
-                              height: 50,
                               width: MediaQuery.of(context).size.width,
                               decoration: BoxDecoration(
                                   boxShadow: [
-                                    BoxShadow(
-                                        color: Colors.grey.shade300,
-                                        spreadRadius: 1,
-                                        blurRadius: 10)
+                                    // BoxShadow(
+                                    //     color: Colors.grey.shade300,
+                                    //     spreadRadius: 1,
+                                    //     blurRadius: 10,),
                                   ],
                                   borderRadius: BorderRadius.circular(20),
                                   color: Colors.white),
@@ -347,7 +348,7 @@ class _HomePageState extends State<HomePage> {
                                               image: DecorationImage(
                                                 image:
                                                     AssetImage(imgList[index]),
-                                                fit: BoxFit.cover,
+                                                fit: BoxFit.contain,
                                               ),
                                               borderRadius:
                                                   BorderRadius.circular(20)),

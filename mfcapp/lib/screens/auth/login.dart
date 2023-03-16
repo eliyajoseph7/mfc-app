@@ -1,5 +1,12 @@
+// ignore_for_file: use_build_context_synchronously
+
 import 'package:flutter/material.dart';
+import 'package:mfcapp/providers/auth.dart';
+import 'package:mfcapp/screens/auth/signup.dart';
+import 'package:mfcapp/screens/index.dart';
 import 'package:proste_bezier_curve/proste_bezier_curve.dart';
+import 'package:provider/provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -10,8 +17,31 @@ class LoginPage extends StatefulWidget {
 
 class _LoginPageState extends State<LoginPage> {
   bool _obscurText = true;
+  final TextEditingController _email = TextEditingController();
+  final TextEditingController _phone = TextEditingController();
+  final _formKey = GlobalKey<FormState>();
+
+
+  @override
+  void initState() {
+    super.initState();
+    checkLoginStatus();
+  }
+
+  checkLoginStatus() async {
+    SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
+    print(sharedPreferences.getString("userId"));
+    if (sharedPreferences.getString("userId") != null) {
+      Navigator.of(context).pushAndRemoveUntil(
+          MaterialPageRoute(
+              builder: (BuildContext context) => const IndexPage()),
+          (Route<dynamic> route) => false);
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
+    var auth = Provider.of<AuthProvider>(context);
     var screenWidth = MediaQuery.of(context).size.width;
     return Scaffold(
       body: ListView(
@@ -80,16 +110,21 @@ class _LoginPageState extends State<LoginPage> {
                             child: Text(
                               'LOGIN',
                               style: TextStyle(
-                                  // fontFamily: 'LobsterTwo',
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: 35),
+                                // fontFamily: 'LobsterTwo',
+                                fontWeight: FontWeight.bold,
+                                fontSize: 35,
+                              ),
                             ),
                           ),
-                          Flexible(child: Text('&'),),
-                          Flexible(child: Padding(
-                            padding: EdgeInsets.only(bottom: 8.0),
-                            child: Text('Chart with us'),
-                          ),),
+                          Flexible(
+                            child: Text('&'),
+                          ),
+                          Flexible(
+                            child: Padding(
+                              padding: EdgeInsets.only(bottom: 8.0),
+                              child: Text('Chart with us'),
+                            ),
+                          ),
                         ],
                       ),
                     ),
@@ -115,34 +150,19 @@ class _LoginPageState extends State<LoginPage> {
                     child: Padding(
                       padding: const EdgeInsets.all(18.0),
                       child: Form(
+                        key: _formKey,
                         child: Column(
                           children: [
-                            Padding(
-                              padding: const EdgeInsets.only(bottom: 8.0),
-                              child: TextFormField(
-                                decoration: const InputDecoration(
-                                    hintText: 'Enter Username',
-                                    label: Text('Username/ Phone'),
-                                    icon: Icon(Icons.account_circle)),
-                              ),
-                            ),
-                            Padding(
-                              padding: const EdgeInsets.only(top: 8.0),
-                              child: TextFormField(
-                                obscureText: _obscurText,
-                                decoration: InputDecoration(
-                                  hintText: 'Enter Passwords',
-                                  label: const Text('Passwords'),
-                                  icon: const Icon(Icons.password),
-                                  suffixIcon: IconButton(
-                                    onPressed: () {
-                                      setState(() {
-                                        _obscurText = !_obscurText;
-                                      });
-                                    },
-                                    icon: _obscurText
-                                        ? const Icon(Icons.visibility_off)
-                                        : const Icon(Icons.visibility),
+                            Flexible(
+                              child: Padding(
+                                padding: const EdgeInsets.only(top: 8.0),
+                                child: TextFormField(
+                                  controller: _phone,
+                                  keyboardType: TextInputType.number,
+                                  decoration: const InputDecoration(
+                                    hintText: 'Phone',
+                                    label: Text('Enter Phone Number'),
+                                    icon: Icon(Icons.phone),
                                   ),
                                 ),
                               ),
@@ -151,7 +171,17 @@ class _LoginPageState extends State<LoginPage> {
                               padding:
                                   const EdgeInsets.only(left: 38.0, top: 40),
                               child: ElevatedButton(
-                                onPressed: null,
+                                style: ElevatedButton.styleFrom(
+                                  backgroundColor: Colors.grey.shade200,
+                                ),
+                                onPressed: () {
+                                  if (_formKey.currentState!.validate()) {
+                                    auth.setLoading();
+                                    var email = _email.text = '${_phone.text}@mfc.com';
+                                    auth.login(
+                                        email, _phone.text, context);
+                                  }
+                                },
                                 child: Padding(
                                   padding: const EdgeInsets.all(10.0),
                                   child: Column(
@@ -159,13 +189,18 @@ class _LoginPageState extends State<LoginPage> {
                                         CrossAxisAlignment.stretch,
                                     children: [
                                       Row(
-                                        mainAxisAlignment: MainAxisAlignment.center,
-                                        children: const [
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.center,
+                                        children: [
                                           Padding(
-                                            padding: EdgeInsets.only(right: 8.0),
-                                            child: Icon(Icons.login),
+                                            padding:
+                                                const EdgeInsets.only(right: 8.0),
+                                            child: auth.isLoading? const SizedBox(height: 25, width: 25, child: CircularProgressIndicator(strokeWidth: 2,)) : const Icon(Icons.login),
                                           ),
-                                          Text('Login'),
+                                           Text(
+                                            auth.isLoading ? 'Please wait..' : 'Login',
+                                            style: TextStyle(),
+                                          ),
                                         ],
                                       ),
                                     ],
@@ -173,6 +208,22 @@ class _LoginPageState extends State<LoginPage> {
                                 ),
                               ),
                             ),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.end,
+                              children: [
+                                TextButton(
+                                  onPressed: () {
+                                    Navigator.of(context).push(
+                                      MaterialPageRoute(
+                                        builder: (BuildContext context) =>
+                                            const SignupPage(),
+                                      ),
+                                    );
+                                  },
+                                  child: const Text('Create account! ', style: TextStyle(color: Colors.blue),),
+                                ),
+                              ],
+                            )
                           ],
                         ),
                       ),

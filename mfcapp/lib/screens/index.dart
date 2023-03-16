@@ -28,13 +28,14 @@ class _IndexPageState extends State<IndexPage> {
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
       var auth = Provider.of<AuthProvider>(context, listen: false);
-      userId = auth.userId;
+      auth.isUserLogedin();
     });
   }
 
   @override
   Widget build(BuildContext context) {
     var bottomBarHeight = MediaQuery.of(context).size.height * 0.08;
+    var auth = Provider.of<AuthProvider>(context);
     return Scaffold(
       body: _widgetOptions.elementAt(selectedIndex),
       bottomNavigationBar: Container(
@@ -82,7 +83,7 @@ class _IndexPageState extends State<IndexPage> {
         onPressed: () {
           Navigator.of(context).push(
           MaterialPageRoute(
-            builder: (BuildContext context) =>  userId != '' ? const ChatPage() : const LoginPage(),
+            builder: (BuildContext context) =>  auth.isLogedin ? const ChatPage() : const LoginPage(),
           ),
         );
         },
