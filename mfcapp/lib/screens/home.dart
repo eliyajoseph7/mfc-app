@@ -16,7 +16,6 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-
   final List<String> imgList = [
     'assets/images/schedule/ratiba.png',
     'assets/images/schedule/sunday.png',
@@ -56,10 +55,11 @@ class _HomePageState extends State<HomePage> {
                         position: ClipPosition.bottom,
                         list: [
                           ThirdOrderBezierCurveSection(
-                              p1: Offset(0, 200),
-                              p2: Offset(0, 140),
-                              p3: Offset(screenWidth , 200),
-                              p4: Offset(screenWidth, 140),),
+                            p1: Offset(0, 200),
+                            p2: Offset(0, 140),
+                            p3: Offset(screenWidth, 200),
+                            p4: Offset(screenWidth, 140),
+                          ),
                         ],
                       ),
                       child: Container(
@@ -400,9 +400,10 @@ class _HomePageState extends State<HomePage> {
                             decoration: BoxDecoration(
                                 boxShadow: [
                                   BoxShadow(
-                                      color: Colors.grey.shade300,
-                                      spreadRadius: 1,
-                                      blurRadius: 1)
+                                    color: Colors.grey.shade300,
+                                    // spreadRadius: 1,
+                                    // blurRadius: 1,
+                                  )
                                 ],
                                 color: Colors.white,
                                 borderRadius: BorderRadius.circular(20)),
