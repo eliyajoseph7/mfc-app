@@ -53,6 +53,8 @@ dependencies:
   proste_bezier_curve: ^2.0.2
   firebase_auth: ^4.2.10
   firebase_core: ^2.7.1
+  # ably_flutter: ^1.2.15
+  ably_flutter_plugin: ^1.0.1
 
 dev_dependencies:
   flutter_test:

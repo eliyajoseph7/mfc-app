@@ -1,6 +1,5 @@
 // ignore_for_file: depend_on_referenced_packages, use_build_context_synchronously
 
-// import 'package:ably_flutter/ably_flutter.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_chat_ui/flutter_chat_ui.dart';
 import 'dart:convert';
@@ -11,124 +10,44 @@ import 'package:flutter/services.dart' show rootBundle;
 import 'package:flutter_chat_types/flutter_chat_types.dart' as types;
 import 'package:http/http.dart' as http;
 import 'package:image_picker/image_picker.dart';
-import 'package:mfcapp/config.dart';
 import 'package:mfcapp/screens/auth/login.dart';
 import 'package:mime/mime.dart';
 import 'package:open_filex/open_filex.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:uuid/uuid.dart';
-import 'package:ably_flutter_plugin/ably_flutter_plugin.dart' as ably;
-import 'package:mfcapp/models/message_model.dart';
 
-class ChatPage extends StatefulWidget {
-  const ChatPage({super.key});
+class ChatBackupPage extends StatefulWidget {
+  const ChatBackupPage({super.key});
 
   @override
-  State<ChatPage> createState() => _ChatPageState();
+  State<ChatBackupPage> createState() => _ChatBackupPageState();
 }
 
-class _ChatPageState extends State<ChatPage> {
-  late ably.Realtime realtimeInstance;
-  var newMsgFromAbly;
-  late ably.RealtimeChannel chatChannel;
-  var myInputController = TextEditingController();
-  var myRandomClientId = '';
+class _ChatBackupPageState extends State<ChatBackupPage> {
   List<types.Message> _messages = [];
   final _user = const types.User(id: '82091008-a484-4a89-ae75-a22bf8d6f3ac');
-  final _user2 = const types.User(id: '82091008-a484-4a89-ae75-a22bf8d6f3ab');
   String name = '';
 
   @override
   void initState() {
     super.initState();
     checkLoginStatus();
-    createAblyRealtimeInstance();
   }
 
-  checkLoginStatus() async {
+    checkLoginStatus() async {
     SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
     if (sharedPreferences.getString("userId") == null) {
       Navigator.of(context).pushReplacement(
           MaterialPageRoute(builder: (BuildContext context) => const LoginPage()),
           );
     } else {
-      _loadMessages();
-      setState(() {
-        name = sharedPreferences.getString('name')!;
+    _loadMessages();
+    setState(() {
+      name = sharedPreferences.getString('name')!;
       
-      });
-    }
-  }
-
-  void createAblyRealtimeInstance() async {
-    var uuid = Uuid();
-    myRandomClientId = uuid.v4();
-    var clientOptions = ably.ClientOptions.fromKey(AblyAPIKey);
-    clientOptions.clientId = myRandomClientId;
-    try {
-      realtimeInstance = ably.Realtime(options: clientOptions);
-      print('Ably instantiated');
-      chatChannel = realtimeInstance.channels.get('mfc-chat');
-      subscribeToChatChannel();
-      realtimeInstance.connection
-          .on(ably.ConnectionEvent.connected)
-          .listen((ably.ConnectionStateChange stateChange) async {
-        print('Realtime connection state changed: ${stateChange.event}');
-      });
-    } catch (error) {
-      print('Error creating Ably Realtime Instance: $error');
-      rethrow;
-    }
-  }
-
-
-void subscribeToChatChannel() {
-    var messageStream = chatChannel.subscribe();
-    messageStream.listen((ably.Message message) {
-      var textMessage;
-      newMsgFromAbly = message.data;
-      print("New message arrived ${message.data}");
-      var hoursIn12HrFormat = message.timestamp.hour > 12
-          ? (message.timestamp.hour - 12)
-          : (message.timestamp.hour);
-      var timeOfDay = message.timestamp.hour < 12 ? ' AM' : ' PM';
-      var msgTime = hoursIn12HrFormat.toString() +
-          ":" +
-          message.timestamp.minute.toString() +
-          timeOfDay;
-      if (message.clientId == myRandomClientId) {
-        textMessage = types.TextMessage(
-          author: _user,
-          // createdAt: DateTime.now().millisecondsSinceEpoch,
-          createdAt: int.parse(msgTime),
-          id: const Uuid().v4(),
-          text: newMsgFromAbly["text"],
-        );
-      } else {
-        textMessage = types.TextMessage(
-          author: _user2,
-          // createdAt: DateTime.now().millisecondsSinceEpoch,
-          createdAt: int.parse(msgTime),
-          id: const Uuid().v4(),
-          text: newMsgFromAbly["text"],
-        );
-      }
-
-    _addMessage(textMessage);
-      setState(() {
-        messages.insert(0, textMessage);
-      });
     });
-  }
-
-  void publishMyMessage() async {
-    // var myMessage = myInputController.text;
-    myInputController.clear();
-    chatChannel.publish(name: "chatMsg", data: {
-      "sender": "randomChatUser",
-      "text": 'myMessage',
-    });
+    }
   }
 
   @override
@@ -426,7 +345,6 @@ void subscribeToChatChannel() {
     );
 
     _addMessage(textMessage);
-    publishMyMessage();
   }
 
   void _loadMessages() async {
