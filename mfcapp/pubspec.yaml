@@ -53,6 +53,7 @@ dependencies:
   proste_bezier_curve: ^2.0.2
   firebase_auth: ^4.2.10
   firebase_core: ^2.7.1
+  avatar_view: ^1.0.1
 
 dev_dependencies:
   flutter_test:
@@ -80,6 +81,7 @@ flutter:
   assets:
     - assets/images/
     - assets/images/schedule/
+    - assets/images/menu_icons/
   #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see
