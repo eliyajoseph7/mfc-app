@@ -35,6 +35,7 @@ class MyApp extends StatelessWidget {
           // Notice that the counter didn't reset back to zero; the application
           // is not restarted.
           fontFamily: 'OpenSans',
+          primaryColor: const Color(0xFFDFDDCE),
           colorScheme: ColorScheme.fromSwatch(primarySwatch: Colors.grey)
               .copyWith(secondary: const Color(0xFFFEF9EB)),
         ),
