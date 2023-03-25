@@ -1,7 +1,6 @@
-import 'package:avatar_view/avatar_view.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/framework.dart';
-import 'package:flutter/src/widgets/placeholder.dart';
+import 'package:mfcapp/providers/state.dart';
+import 'package:provider/provider.dart';
 
 class TopScreenList extends StatefulWidget {
   TopScreenList({super.key});
@@ -11,13 +10,36 @@ class TopScreenList extends StatefulWidget {
 }
 
 class _TopScreenListState extends State<TopScreenList> {
-  final List titles = ['About us', 'Events', 'Gallery', 'Adverts', 'Others'];
-  final List images = ['assets/images/menu_icons/about.png', 'assets/images/menu_icons/calendar.png', 'assets/images/menu_icons/gallery.png', 'assets/images/menu_icons/speaker.png', 'assets/images/menu_icons/others.png'];
+  final List titles = [
+    'Home',
+    'Sermons',
+    'Gallery',
+    'Events',
+    'About us',
+    'Others'
+  ];
+  // final List images = [
+  //   'assets/images/menu_icons/home.jpeg',
+  //   'assets/images/menu_icons/sermon.png',
+  //   'assets/images/menu_icons/gallery.png',
+  //   'assets/images/menu_icons/calendar.jpeg',
+  //   'assets/images/menu_icons/about.jpeg',
+  //   'assets/images/menu_icons/others.png'
+  // ];
+  final List<IconData> icons = [
+    Icons.home_outlined,
+    Icons.menu_book_rounded,
+    Icons.album_outlined,
+    Icons.event_available_outlined,
+    Icons.info_outline_rounded,
+    Icons.more_horiz
+  ];
 
   var selectedindex = 0;
 
   @override
   Widget build(BuildContext context) {
+    var state = Provider.of<StateProvider>(context);
     return ListView.builder(
         physics: const BouncingScrollPhysics(),
         scrollDirection: Axis.horizontal,
@@ -30,38 +52,31 @@ class _TopScreenListState extends State<TopScreenList> {
                 GestureDetector(
                   onTap: () => setState(() {
                     selectedindex = index;
+                    state.setIndex(index);
                   }),
                   child: Column(
                     children: [
-                      Container(
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(50),
-                          boxShadow: [
-                            selectedindex == index ? BoxShadow(
-                              color: Colors.grey.shade100, spreadRadius: 1, blurRadius: 3
-                            ) : const BoxShadow()
-                          ]
-                        ),
-                        child: AvatarView(
-                          radius: 35,
-                          borderWidth: selectedindex == index ? 4.5 : 3.0,
-                          borderColor: selectedindex == index ? Colors.purple[700] : Colors.white70,
-                          avatarType: AvatarType.CIRCLE,
-                          backgroundColor: Colors.grey,
-                          imagePath: images[index],
-                        ),
+                      Icon(
+                        icons[index],
+                        color: state.index == index
+                            ? Colors.blue.shade600
+                            : Colors.black54,
+                        size: 30,
                       ),
                       FittedBox(
                           child: Text(
                         titles[index],
                         style: TextStyle(
-                          color: selectedindex == index ? Colors.blueGrey[700] : Colors.grey,
+                          color: state.index == index
+                              ? Colors.blue.shade600
+                              : Colors.grey,
                           fontWeight: FontWeight.bold,
                         ),
                       ))
                     ],
                   ),
                 ),
+                // ignore: prefer_const_constructors
                 SizedBox(
                   width: 25,
                 )
