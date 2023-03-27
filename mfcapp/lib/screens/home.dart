@@ -81,31 +81,41 @@ class _HomePageState extends State<HomePage> {
                   children: [
                     Container(
                       height: 8,
-                      decoration: BoxDecoration(
-                        color: Color(0xFFEFEFEF)
+                      decoration: BoxDecoration(color: Color(0xFFEFEFEF)),
+                    ),
+                    ClipRRect(
+                      borderRadius: BorderRadius.only(
+                          topLeft: Radius.circular(20),
+                          topRight: Radius.circular(20)),
+                      child: Container(
+                        height: 80,
+                        color: Colors.white,
+                        child: TopScreenList(),
                       ),
                     ),
-                        ClipRRect(
-                          borderRadius: BorderRadius.only(
-                            topLeft: Radius.circular(20),
-                            topRight: Radius.circular(20)
-                          ),
-                          child: Container(
-                            height: 80,
-                            color: Colors.white,
-                            child: TopScreenList(),
-                          ),
-                        ),
                     Expanded(
-                      child: Container(
-                        height: MediaQuery.of(context).size.height,
-                        child: ListView(
-                          // shrinkWrap: true,
-                          physics: BouncingScrollPhysics(),
-                          padding: EdgeInsets.zero,
-                          children: [
-                            _widgets[state.index]
-                          ],
+                      child: GestureDetector(
+                        onHorizontalDragEnd: (details) {
+                          // print(details.primaryVelocity);
+                          // Swiping in right direction.
+                          if (details.primaryVelocity! > 0) {
+                            state.setIndex(state.index - 1);
+                          }
+
+                          // Swiping in left direction.
+                          if (details.primaryVelocity! < 0) {
+                            state.setIndex(state.index + 1);
+
+                          }
+                        },
+                        child: SizedBox(
+                          height: MediaQuery.of(context).size.height,
+                          child: ListView(
+                            // shrinkWrap: true,
+                            physics: BouncingScrollPhysics(),
+                            padding: EdgeInsets.zero,
+                            children: [_widgets[state.index]],
+                          ),
                         ),
                       ),
                     ),

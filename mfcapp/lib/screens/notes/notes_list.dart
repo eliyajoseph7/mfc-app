@@ -13,7 +13,7 @@ class _MyNotesState extends State<MyNotes> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xFFDFDDCE),
+      backgroundColor: const Color(0xFFFFFFFF),
       appBar: AppBar(
         elevation: 0,
         toolbarHeight: 80,
@@ -31,9 +31,10 @@ class _MyNotesState extends State<MyNotes> {
                   const Text(
                     'My Notes',
                     style: TextStyle(
-                        fontSize: 35,
-                        fontWeight: FontWeight.w700,
-                        fontFamily: 'LobsterTwo'),
+                        fontSize: 28,
+                        // fontWeight: FontWeight.w600,
+                        // fontFamily: 'LobsterTwo',
+                        ),
                   ),
                   Text(
                     'All..',
@@ -44,7 +45,7 @@ class _MyNotesState extends State<MyNotes> {
             ],
           ),
         ),
-        backgroundColor: const Color(0xFFDFDDCE),
+        backgroundColor: const Color(0xFFFFFFFF),
         // flexibleSpace: Container(
         //   decoration: BoxDecoration(
         //       gradient: LinearGradient(
@@ -61,100 +62,151 @@ class _MyNotesState extends State<MyNotes> {
         //       color: Colors.white),
         // ),
       ),
-      body: ClipRRect(
-          borderRadius: const BorderRadius.only(
-            topLeft: Radius.circular(25),
-            topRight: Radius.circular(25)
-          ),
-          child: Container(
-            decoration: const BoxDecoration(
-              borderRadius: BorderRadius.only(
-                topLeft: Radius.circular(25),
-                topRight: Radius.circular(25)
-              ),
-              color: Colors.white
-            ),
+      body: Column(
+        children: [
+          Container(
+            height: 60,
+            decoration: BoxDecoration(
+                borderRadius: const BorderRadius.only(
+                    topLeft: Radius.circular(25),
+                    topRight: Radius.circular(25)),
+                color: Colors.grey.shade200),
             child: Padding(
-            padding: const EdgeInsets.symmetric(vertical: 0.0, horizontal: 8),
-            child: SizedBox(
-              height: MediaQuery.of(context).size.height,
-              child: ListView.builder(
-                // padding: EdgeInsets.zero,
-                physics: const BouncingScrollPhysics(),
-                itemCount: 10,
-                itemBuilder: ((context, index) {
-                  return Padding(
-                    padding: index == 0 ? const EdgeInsets.only(top: 16, bottom: 8) : const EdgeInsets.symmetric(vertical: 8),
-                    child: GestureDetector(
-                      onTap: () => Navigator.of(context).push(
-                        MaterialPageRoute(
-                            builder: (context) => const AddNotePage()),
+              padding:
+                  const EdgeInsets.symmetric(vertical: 12.0, horizontal: 18),
+              child: TextField(
+                autofocus: false,
+                style: const TextStyle(color: Colors.blueGrey),
+                textAlignVertical: TextAlignVertical.bottom,
+                decoration: InputDecoration(
+                    enabledBorder: OutlineInputBorder(
+                      borderSide: BorderSide(
+                        color: Colors.grey.shade50,
+                        width: 0,
                       ),
-                      child: Container(
-                        decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(10),
-                            color: Colors.grey.shade100,
-                            boxShadow: [
-                              BoxShadow(
-                                  color: Colors.grey.shade200,
-                                  spreadRadius: 1,
-                                  blurRadius: 1)
-                            ]),
-                        height: MediaQuery.of(context).size.height * 0.13,
-                        child: Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              const Text(
-                                'This is just a sample header',
-                                style: TextStyle(
-                                    fontWeight: FontWeight.w600, fontSize: 18),
-                                softWrap: true,
-                                overflow: TextOverflow.fade,
+                      borderRadius: BorderRadius.circular(25),
+                    ),
+                    focusColor: Colors.grey.shade100,
+                    focusedBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(25),
+                      borderSide:
+                          BorderSide(width: 1, color: Colors.grey.shade100),
+                    ),
+                    prefixIcon: Icon(Icons.search),
+                    hintText: 'Search note..',
+                    hintStyle: TextStyle(),
+                    filled: true,
+                    fillColor: Colors.grey.shade50),
+              ),
+            ),
+          ),
+          Expanded(
+            child: Container(
+              color: Colors.grey.shade200,
+              child: ClipRRect(
+                borderRadius: const BorderRadius.only(
+                    topLeft: Radius.circular(25),
+                    topRight: Radius.circular(25)),
+                child: Container(
+                  decoration: const BoxDecoration(
+                      borderRadius: BorderRadius.only(
+                          topLeft: Radius.circular(25),
+                          topRight: Radius.circular(25)),
+                      color: Colors.white),
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(
+                        vertical: 0.0, horizontal: 8),
+                    child: SizedBox(
+                      height: MediaQuery.of(context).size.height,
+                      child: ListView.builder(
+                        // padding: EdgeInsets.zero,
+                        physics: const BouncingScrollPhysics(),
+                        itemCount: 10,
+                        itemBuilder: ((context, index) {
+                          return Padding(
+                            padding: index == 0
+                                ? const EdgeInsets.only(top: 16, bottom: 8)
+                                : const EdgeInsets.symmetric(vertical: 8),
+                            child: GestureDetector(
+                              onTap: () => Navigator.of(context).push(
+                                MaterialPageRoute(
+                                    builder: (context) => const AddNotePage()),
                               ),
-                              Text(
-                                'In the first lesson, the teacher Andre Madarang starts off by explaining why you should learn the library. Shortly speaking',
-                                style: TextStyle(color: Colors.grey[700]),
-                                softWrap: true,
-                                overflow: TextOverflow.ellipsis,
-                              ),
-                              Padding(
-                                padding: const EdgeInsets.symmetric(vertical: 8.0),
-                                child: Row(
-                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                  children: [
-                                    Text(
-                                      DateFormat.yMMMEd()
-                                          .format(DateTime.now())
-                                          .toString(),
-                                      style: TextStyle(
-                                        color: Colors.grey.shade700,
+                              child: Container(
+                                decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(10),
+                                    color: Colors.grey.shade100,
+                                    boxShadow: [
+                                      BoxShadow(
+                                          color: Colors.grey.shade200,
+                                          spreadRadius: 1,
+                                          blurRadius: 1)
+                                    ]),
+                                height:
+                                    MediaQuery.of(context).size.height * 0.13,
+                                child: Padding(
+                                  padding: const EdgeInsets.all(8.0),
+                                  child: Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      const Text(
+                                        'This is just a sample header',
+                                        style: TextStyle(
+                                            fontWeight: FontWeight.w600,
+                                            fontSize: 18),
+                                        softWrap: true,
+                                        overflow: TextOverflow.fade,
                                       ),
-                                    ),
-                                    Text(
-                                      DateFormat.Hm()
-                                          .format(DateTime.now())
-                                          .toString(),
-                                      style: TextStyle(
-                                        color: Colors.grey.shade700,
+                                      Text(
+                                        'In the first lesson, the teacher Andre Madarang starts off by explaining why you should learn the library. Shortly speaking',
+                                        style:
+                                            TextStyle(color: Colors.grey[700]),
+                                        softWrap: true,
+                                        overflow: TextOverflow.ellipsis,
                                       ),
-                                    ),
-                                  ],
+                                      Padding(
+                                        padding: const EdgeInsets.symmetric(
+                                            vertical: 8.0),
+                                        child: Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.spaceBetween,
+                                          children: [
+                                            Text(
+                                              DateFormat.yMMMEd()
+                                                  .format(DateTime.now())
+                                                  .toString(),
+                                              style: TextStyle(
+                                                color: Colors.grey.shade700,
+                                              ),
+                                            ),
+                                            Text(
+                                              DateFormat.Hm()
+                                                  .format(DateTime.now())
+                                                  .toString(),
+                                              style: TextStyle(
+                                                color: Colors.grey.shade700,
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                      )
+                                    ],
+                                  ),
                                 ),
-                              )
-                            ],
-                          ),
-                        ),
+                              ),
+                            ),
+                          );
+                        }),
                       ),
                     ),
-                  );
-                }),
+                  ),
+                ),
               ),
             ),
-                ),
           ),
-        ),
+        ],
+      ),
       floatingActionButton: FloatingActionButton(
         onPressed: () => Navigator.of(context)
             .push(MaterialPageRoute(builder: (context) => const AddNotePage())),

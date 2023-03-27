@@ -12,6 +12,8 @@ class SermonsPage extends StatefulWidget {
 class _SermonsPageState extends State<SermonsPage> {
   @override
   Widget build(BuildContext context) {
-    return Container();
+    return const Center(
+      child: Text('Sermons Screen'),
+    );
   }
 }

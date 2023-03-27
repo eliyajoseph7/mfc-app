@@ -12,6 +12,8 @@ class OthersPage extends StatefulWidget {
 class _OthersPageState extends State<OthersPage> {
   @override
   Widget build(BuildContext context) {
-    return Container();
+    return const Center(
+      child: Text('Others Screen'),
+    );
   }
 }

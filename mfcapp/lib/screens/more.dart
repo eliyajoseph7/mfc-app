@@ -23,19 +23,20 @@ class _MorePageState extends State<MorePage> {
          return true;
       },
       child: Scaffold(
-      backgroundColor: const Color(0xFFDFDDCE),
+      // backgroundColor: const Color(0xFFDFDDCE),
+      backgroundColor: const Color(0xFFFFFFFF),
         body: Stack(
           children: [
             Padding(
               padding: const EdgeInsets.only(top: 30, bottom: 8),
               child: SizedBox(
-                height: 75,
+                height: 80,
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   crossAxisAlignment: CrossAxisAlignment.start,
-                  children: const [
-                    Padding(
-                      padding: EdgeInsets.symmetric(horizontal: 8.0),
+                  children: [
+                    const Padding(
+                      padding: EdgeInsets.only(left: 8.0, right: 8, bottom: 8),
                       child: FittedBox(
                         fit: BoxFit.fitHeight,
                         child: Text(
@@ -50,6 +51,16 @@ class _MorePageState extends State<MorePage> {
                     // Divider(
                     //   thickness: 2,
                     // ),
+                    Container(
+                      height: 10,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.only(
+                          topLeft: Radius.circular(25),
+                          topRight: Radius.circular(25),
+                        ),
+                        color: Colors.grey.shade100
+                      ),
+                    ),
                   ],
                 ),
               ),
