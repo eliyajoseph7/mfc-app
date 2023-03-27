@@ -59,6 +59,8 @@ dependencies:
   ably_flutter_plugin: ^1.0.0+dev.2
   motion_toast: ^2.6.5
   connectivity_plus: ^2.3.0
+  http: any
+  float_column: ^1.4.1
 
 dev_dependencies:
   flutter_test:
