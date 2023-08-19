@@ -6,7 +6,7 @@ import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter/material.dart' hide Badge;
 import 'package:mfcapp/providers/auth.dart';
 import 'package:mfcapp/screens/auth/login.dart';
-import 'package:mfcapp/screens/chart.dart';
+// import 'package:mfcapp/screens/chart.dart';
 import 'package:mfcapp/screens/more.dart';
 import 'package:mfcapp/screens/home.dart';
 import 'package:mfcapp/screens/new_chart.dart';
@@ -36,7 +36,7 @@ class _IndexPageState extends State<IndexPage> {
     _networkConnectivity.initialise();
     _networkConnectivity.myStream.listen((source) {
       _source = source;
-      print('source $_source');
+      // print('source $_source');
       // 1.
       switch (_source.keys.toList()[0]) {
         case ConnectivityResult.mobile:

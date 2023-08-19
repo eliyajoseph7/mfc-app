@@ -59,7 +59,7 @@ class _TopScreenListState extends State<TopScreenList> {
                       Icon(
                         icons[index],
                         color: state.index == index
-                            ? Colors.blue.shade600
+                            ? Colors.amber.shade800
                             : Colors.black54,
                         size: 30,
                       ),
@@ -68,7 +68,7 @@ class _TopScreenListState extends State<TopScreenList> {
                         titles[index],
                         style: TextStyle(
                           color: state.index == index
-                              ? Colors.blue.shade600
+                              ? Colors.amber.shade800
                               : Colors.grey,
                           fontWeight: FontWeight.bold,
                         ),

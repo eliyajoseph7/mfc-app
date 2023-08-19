@@ -59,7 +59,7 @@ class _AboutPageState extends State<AboutPage> {
                                       CrossAxisAlignment.start,
                                   children: [
                                     Text(
-                                      'Jonathan David',
+                                      'Joel Kajituel',
                                       style: TextStyle(
                                         fontSize: 25,
                                         fontWeight: FontWeight.w500,
@@ -116,7 +116,7 @@ class _AboutPageState extends State<AboutPage> {
                                       CrossAxisAlignment.start,
                                   children: [
                                     Text(
-                                      'Simon Peter',
+                                      'Christopher Kajituel',
                                       style: TextStyle(
                                         fontSize: 25,
                                         fontWeight: FontWeight.w500,
@@ -155,7 +155,7 @@ class _AboutPageState extends State<AboutPage> {
                   child: Column(
                     children: [
                       Text(
-                        'Sample Church Name Design',
+                        'Mighty Faith Church International',
                         style: TextStyle(
                             fontSize: 35,
                             wordSpacing: 5,
