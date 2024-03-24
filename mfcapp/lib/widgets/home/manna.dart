@@ -89,9 +89,9 @@ class FreshManna extends StatelessWidget {
                               overflow: TextOverflow.ellipsis,
                               maxLines: 5,
                             ),
-                            Row(
+                            const Row(
                               mainAxisAlignment: MainAxisAlignment.end,
-                              children: const [
+                              children: [
                                 Padding(
                                   padding:
                                       EdgeInsets.symmetric(horizontal: 8.0),

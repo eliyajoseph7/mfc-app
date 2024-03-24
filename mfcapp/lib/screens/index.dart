@@ -54,24 +54,25 @@ class _IndexPageState extends State<IndexPage> {
       // 2.
       setState(() {});
       // 3.
-      string == 'Offline' ?
-      MotionToast.warning(
-        title: Text(string),
-        description: const Text(""),
-        height: 30,
-        layoutOrientation: ToastOrientation.rtl,
-        animationType: AnimationType.fromRight,
-        width: 200,
-        position: MotionToastPosition.top,
-      ).show(context) : MotionToast.success(
-        title: Text(string),
-        description: const Text(""),
-        height: 30,
-        layoutOrientation: ToastOrientation.rtl,
-        animationType: AnimationType.fromRight,
-        width: 200,
-        position: MotionToastPosition.top,
-      ).show(context);
+      string == 'Offline'
+          ? MotionToast.warning(
+              title: Text(string),
+              description: const Text(""),
+              height: 30,
+              layoutOrientation: ToastOrientation.rtl,
+              animationType: AnimationType.fromRight,
+              width: 200,
+              position: MotionToastPosition.top,
+            ).show(context)
+          : MotionToast.success(
+              title: Text(string),
+              description: const Text(""),
+              height: 30,
+              layoutOrientation: ToastOrientation.rtl,
+              animationType: AnimationType.fromRight,
+              width: 200,
+              position: MotionToastPosition.top,
+            ).show(context);
       // ScaffoldMessenger.of(context).showSnackBar(
       //   SnackBar(
       //     content: Text(

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:mfcapp/config.dart';
 import 'package:mfcapp/models/message_model.dart';
 import 'package:uuid/uuid.dart';
-import 'package:ably_flutter_plugin/ably_flutter_plugin.dart' as ably;
+import 'package:ably_flutter/ably_flutter.dart' as ably;
 
 class ChatScreen extends StatefulWidget {
   ChatScreen();
@@ -59,11 +59,11 @@ class _ChatScreenState extends State<ChatScreen> {
       Message newChatMsg;
       newMsgFromAbly = message.data;
       print("New message arrived ${message.data}");
-      var hoursIn12HrFormat = message.timestamp.hour > 12
-          ? (message.timestamp.hour - 12)
-          : (message.timestamp.hour);
-      var timeOfDay = message.timestamp.hour < 12 ? ' AM' : ' PM';
-      var msgTime = "$hoursIn12HrFormat:${message.timestamp.minute}$timeOfDay";
+      var hoursIn12HrFormat = message.timestamp!.hour > 12
+          ? (message.timestamp!.hour - 12)
+          : (message.timestamp!.hour);
+      var timeOfDay = message.timestamp!.hour < 12 ? ' AM' : ' PM';
+      var msgTime = "$hoursIn12HrFormat:${message.timestamp!.minute}$timeOfDay";
       if (message.clientId == myRandomClientId) {
         newChatMsg = Message(
           sender: currentUser,
